@@ -1,5 +1,6 @@
 import math
 from tinygrad.nn import dtypes, Tensor, Linear, LSTMCell
+from .qr import QR
 
 
 class LSTMPolicy:
@@ -8,6 +9,11 @@ class LSTMPolicy:
         self.decoder = Linear(n_hidden, env.n_acts)
         self.value_head = Linear(n_hidden, 1)
         self.lstm = LSTMCell(n_hidden, n_hidden)
+        self.lstm.bias_hh *= 0
+        self.lstm.bias_ih *= 0
+        qr = QR()
+        self.lstm.weight_hh = qr(self.lstm.weight_hh)[0]
+        self.lstm.weight_ih = qr(self.lstm.weight_ih)[0]
 
     def __call__(self, x, state=None, act=None, with_entropy=None):
         with_entropy = act is not None if with_entropy is None else with_entropy
