@@ -39,7 +39,6 @@ class Learner:
 
     @TinyJit
     def rollout(self, duration, state=None):
-        Tensor.training = False
         for i in range(duration):
             o = Tensor(self.env.obs)#, requires_grad=False)
             act, logp, _, value, state = self.model(o, state=state)
@@ -79,7 +78,7 @@ def ppo(model, opt, obs, values, acts, logprobs, rewards, dones, bs=8192, gamma=
         loss = policy_loss + value_coef * value_loss - entropy_coef * entropy
         opt.zero_grad()
         loss.backward()
-        # torch.nn.utils.clip_grad_norm_(model.parameters(), max_grad_norm)
+        clip_grad_norm(opt.params, max_grad_norm)
         opt.step()
         kl = ((ratio - 1) - logratio).mean()
         metrics.append([loss, policy_loss, value_loss, entropy, kl])
@@ -93,3 +92,11 @@ def get_advantages(values, rewards, dones, gamma=.99, gae_lambda=.95):  # see ar
         delta = rewards[:, -t] + gamma * values[:, -t] * not_dones[:, -t] - values[:, -t-1]
         advs[:, -t-1] = delta + gamma * gae_lambda * not_dones[:, -t] * advs[:, -t]
     return advs
+
+
+def clip_grad_norm(parameters, max_norm, norm_type=2):
+    total_norm = Tensor.cat(*[p.grad.view(-1) for p in parameters]).pow(norm_type).pow(1 / norm_type).sum()
+    clip_coef = max_norm / (total_norm + 1e-6)
+    clip_coef = clip_coef.clip(min_=1)
+    for p in parameters:
+        p.grad *= clip_coef
