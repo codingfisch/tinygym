@@ -1,13 +1,19 @@
-[tool.poetry]
+[build-system]
+requires = ['setuptools', 'wheel', 'Cython', 'numpy']
+build-backend = 'setuptools.build_meta'
+
+[project]
 name = 'tinygym'
 version = '0.0.1'
 description = 'Reinforcement learning in tinygrad'
-authors = ['codingfisch <l_fisc17@wwu.de>']
+authors = [{name = 'codingfisch', email = 'l_fisc17@wwu.de'}]
 readme = 'README.md'
+dependencies = ['tinygrad', 'Cython', 'tqdm', 'plotille', 'tensorboard']
 
-[tool.poetry.dependencies]
-python = '^3.9'
+[tool.setuptools]
+license-files = []
+packages = ['tinygym', 'tinygym.envs']
+include-package-data = true
 
-[build-system]
-requires = ['poetry-core']
-build-backend = 'poetry.core.masonry.api'
+[tool.setuptools.package-data]
+tinygym = ['envs/*.pyx', 'envs/*.c']
