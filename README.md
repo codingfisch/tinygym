@@ -24,7 +24,7 @@ To potentially enable `tinygrad.TinyJit` (does not work yet, hence the slowness)
 - `Learner` does not `.setup_data` and
 - `rollout` is a function (instead of a `Learner`-method) that fills a list with Tensors and `.stack`s them at the end
 
-Since it somehow performs better in tinygrad `tinygym` uses
+Since it somehow performs better
 - `.uniform` (`tinygrad` default) instead of `.kaiming_uniform` (`torch` default) weight initialization for `nn.Linear`
 
 Custom `tinygrad`-rewrites of `torch.nn.init.orthogonal_` & `torch.nn.utils.clip_grad_norm_`are used
