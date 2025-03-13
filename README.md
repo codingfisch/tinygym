@@ -1,4 +1,7 @@
 # tinygym
+
+This is the onefile branch. Use the single-file implementation `train_tinygym.py` (=`tinygrad`) to quickly test stuff and `train_flashrl.py` (=`torch`) for comparisons!
+
 `tinygym` reimplements [`flashrl`](https://github.com/codingfisch/flashrl), while using [`tinygrad`](https://github.com/tinygrad/tinygrad) instead of [`torch`](https://github.com/pytorch/pytorch)
 
 🛠️ `pip install tinygym` or clone the repo & `pip install -r requirements.txt`
