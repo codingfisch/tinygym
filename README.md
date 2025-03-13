@@ -7,7 +7,7 @@
 The [README of `flashrl`](https://github.com/codingfisch/flashrl) is mostly valid for `tinygym` with the biggest difference being:
   - **`tinygym` is not fast (yet)** -> Learns Pong in ~5 minutes instead of 5 seconds (on a RTX 3090)
 
-Just like in `flashrl`, you can run `python train.py` and it should look like this (with the progress bar moving ~60x slower):
+Just like in `flashrl`, `python train.py` should look like this (with the progress bar moving ~60x slower):
 <p align="center">
   <img src="https://github.com/user-attachments/assets/62da23a8-4d30-41f8-8843-1267e43a8744">
 </p>
@@ -24,7 +24,7 @@ To potentially enable `tinygrad.TinyJit` (does not work yet, hence the slowness)
 - `Learner` does not `.setup_data` and
 - `rollout` is a function (instead of a `Learner`-method) that fills a list with Tensors and `.stack`s them at the end
 
-Since it somehow performs better in tinygrad `tinygym` uses
+Since it somehow performs better
 - `.uniform` (`tinygrad` default) instead of `.kaiming_uniform` (`torch` default) weight initialization for `nn.Linear`
 
 Custom `tinygrad`-rewrites of `torch.nn.init.orthogonal_` & `torch.nn.utils.clip_grad_norm_`are used
