@@ -7,7 +7,7 @@
 The [README of `flashrl`](https://github.com/codingfisch/flashrl) is mostly valid for `tinygym` with the biggest difference being:
   - **`tinygym` is not fast (yet)** -> Learns Pong in ~5 minutes instead of 5 seconds (on a RTX 3090)
 
-Just like in `flashrl`, you can run `python train.py` and it should look like this (with the progress bar moving ~60x slower):
+Just like in `flashrl`, `python train.py` should look like this (with the progress bar moving ~60x slower):
 <p align="center">
   <img src="https://github.com/user-attachments/assets/62da23a8-4d30-41f8-8843-1267e43a8744">
 </p>
