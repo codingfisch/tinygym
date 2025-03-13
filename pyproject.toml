@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = 'tinygym'
-version = '0.0.1'
+version = '0.1.0'
 description = 'Reinforcement learning in tinygrad'
 authors = [{name = 'codingfisch', email = 'l_fisc17@wwu.de'}]
 readme = 'README.md'
